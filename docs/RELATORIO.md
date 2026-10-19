@@ -976,8 +976,8 @@ curl http://localhost:8080/estatisticas
 2. **Volumes são independentes dos contêineres:**
    ```
    [Contêiner achados-web] ──┐
-   [Contêiner achados-db]   ─┼─> [Volume fotos] (persiste)
-                             └─> [Volume dados_banco] (persiste)
+   [Contêiner achados-db]  ─┼─> [Volume fotos] (persiste)
+                              └─> [Volume dados_banco] (persiste)
    ```
 
 3. **`docker compose up -d` faz:**
@@ -1249,12 +1249,4 @@ fi
 
 ## 📚 Referências
 
-- [Dockerfile best practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
-- [Docker Compose specification](https://docs.docker.com/compose/compose-file/)
-- [Docker volumes](https://docs.docker.com/storage/volumes/)
-- [PostgreSQL Docker Hub](https://hub.docker.com/_/postgres)
-- [Gunicorn documentation](https://docs.gunicorn.org/)
-
----
-
-**Documento atualizado em:** 19/10/2026
+- [Dockerfile best pr

@@ -1,59 +1,59 @@
-# 🔍 Achados & Perdidos
+# 🌸 Achados & Perdidos 🌸
 
-Sistema de gerenciamento de objetos perdidos do campus, empacotado em contêineres Docker para fácil implantação e escalabilidade.
+Um sisteminha super fofo de gerenciamento de objetos perdidos do campus, empacotadinho em contêineres Docker para facilitar a nossa vida e escalar como mágica! ✨☁️
 
-## 📋 Índice
+## 🎀 Índice Mágico
 
-- [Objetivo](#-objetivo)
-- [Pré-requisitos](#-pré-requisitos)
-- [Configuração inicial](#-configuração-inicial)
-- [Como subir o ambiente](#-como-subir-o-ambiente)
-- [Testando a aplicação](#-testando-a-aplicação)
-- [Rotas da API](#-rotas-da-api)
-- [Como parar e destruir o ambiente](#-como-parar-e-destruir-o-ambiente)
-- [Estrutura do projeto](#-estrutura-do-projeto)
-- [Desafios bônus implementados](#-desafios-bônus-implementados)
+- [Nosso Objetivo](#-nosso-objetivo-cor-de-rosa-)
+- [Pré-requisitos](#-o-que-você-precisa-ter-pré-requisitos-)
+- [Preparando o terreno](#-preparando-o-terreno-)
+- [Voando para a Nuvem](#-voando-para-a-nuvem-️)
+- [Hora de Testar a Mágica](#-hora-de-testar-a-mágica-)
+- [Caminhos da nossa API](#-caminhos-da-nossa-api-)
+- [Hora de dar Tchau](#-hora-de-dar-tchau-parar-e-destruir-)
+- [Como organizamos nossa casinha](#-como-organizamos-nossa-casinha-)
+- [Presentinhos Bônus](#-presentinhos-bônus-implementados-)
 
 ---
 
-## 🎯 Objetivo
+## 💖 Nosso Objetivo Cor-de-Rosa 
 
-Este projeto empacota o sistema **Achados & Perdidos** em contêineres Docker, permitindo que qualquer pessoa suba o ambiente completo (aplicação web + banco de dados) com um único comando, sem instalações manuais.
+Este projeto empacota o sistema **Achados & Perdidos** em contêineres Docker, permitindo que qualquer pessoa suba o ambiente completo (aplicação web + banco de dados) com um único comando, sem instalações chatas e manuais. Tudo perfeitinho e automatizado! 🌷
 
 **Principais características:**
-- ✅ Dados persistentes mesmo após recriar os contêineres
-- ✅ Senhas protegidas em arquivo `.env` (não versionado)
-- ✅ Banco de dados isolado da rede externa
-- ✅ Usuário sem privilégios de root no contêiner web
-- ✅ Healthcheck garantindo que o banco aceita conexões antes da aplicação iniciar
+- 🎀 Dados persistentes (nada se perde, tudo se guarda!)
+- 🎀 Senhas super protegidas no arquivo `.env` (escondidas do mundo)
+- 🎀 Banco de dados isolado da rede externa, bem seguro
+- 🎀 Usuário sem privilégios de root no contêiner web, porque segurança é essencial
+- 🎀 Healthcheck garantindo que o banco está prontinho antes da aplicação iniciar
 
 ---
 
-## 📦 Pré-requisitos
+## 🧸 O que você precisa ter (Pré-requisitos)
 
-Você precisa ter instalado:
+Você precisa ter instalado no seu computador:
 
-1. **Docker** (versão 20.10 ou superior)
-2. **Docker Compose** (versão 2.0 ou superior)
+1. **Docker** (versão 20.10 ou superior) 🐳
+2. **Docker Compose** (versão 2.0 ou superior) ✨
 
-### Verificar instalação:
+### Para verificar se já tem tudo certinho:
 
 ```bash
 docker --version
 docker compose version
 ```
 
-**Instalação do Docker:**
+**Onde baixar:**
 - **Windows/Mac**: [Docker Desktop](https://www.docker.com/products/docker-desktop)
 - **Linux**: [Instruções oficiais](https://docs.docker.com/engine/install/)
 
 ---
 
-## ⚙️ Configuração inicial
+## ⚙️ Preparando o Terreno ✨
 
 ### 1. Configurar as credenciais do banco
 
-Copie o arquivo de exemplo e edite com suas senhas:
+Copie o nosso arquivo de exemplo e edite com as suas senhas secretas:
 
 **Windows (PowerShell):**
 ```powershell
@@ -67,48 +67,48 @@ cp .env.example .env
 nano .env
 ```
 
-**Conteúdo do `.env`:**
+**Conteúdo do seu `.env`:**
 ```env
 POSTGRES_DB=achados_perdidos
 POSTGRES_USER=achados_user
-POSTGRES_PASSWORD=SuaSenhaForteAqui123!
+POSTGRES_PASSWORD=SuaSenhaFofaEForteAqui123!
 ```
 
-> ⚠️ **IMPORTANTE**: O arquivo `.env` contém senhas reais e **NÃO deve ser versionado** no Git (já está no `.gitignore`).
+> ⚠️ **ATENÇÃO CUIDADOSA**: O arquivo `.env` contém senhas reais e **NÃO deve ser enviado** para o GitHub de jeito nenhum (ele já está no nosso `.gitignore`, ufa!). 🙈
 
 ---
 
-## 🚀 Como subir o ambiente
+## 🚀 Voando para a Nuvem ☁️✨
 
-### Comando único para subir tudo:
+### O comando mágico para subir tudo de uma vez:
 
 ```bash
 docker compose up -d --build
 ```
 
-**O que acontece:**
-1. ✅ Constrói a imagem da aplicação web (`achados-web`)
-2. ✅ Baixa a imagem do PostgreSQL 16 Alpine
-3. ✅ Cria a rede interna `rede_interna`
-4. ✅ Cria os volumes `dados_banco` e `fotos`
-5. ✅ Sobe o banco de dados e executa o `init.sql`
-6. ✅ Aguarda o banco ficar saudável (healthcheck)
-7. ✅ Sobe a aplicação web conectada ao banco
+**O que essa mágica faz:**
+1. 🌸 Constrói a imagem da nossa aplicação web (`achados-web`)
+2. 🌸 Baixa a imagem do PostgreSQL 16 Alpine
+3. 🌸 Cria a nossa rede interna toda conectadinha (`rede_interna`)
+4. 🌸 Cria os volumes `dados_banco` e `fotos` para guardar tudo com carinho
+5. 🌸 Sobe o banco de dados e executa o `init.sql`
+6. 🌸 Espera o banco ficar saudável (healthcheck)
+7. 🌸 Sobe a aplicação web conectada ao banco
 
-### Verificar se está rodando:
+### Para ver se está tudo rodando lindamente:
 
 ```bash
 docker compose ps
 ```
 
-**Saída esperada:**
+**O que vai aparecer:**
 ```
-NAME                IMAGE                    STATUS              PORTS
-achados-db          postgres:16-alpine       Up (healthy)        -
-achados-web         achados-perdidos-web     Up                  0.0.0.0:8080->5000/tcp
+NAME                IMAGE                    STATUS             PORTS
+achados-db          postgres:16-alpine       Up (healthy)       -
+achados-web         achados-perdidos-web     Up                 0.0.0.0:8080->5000/tcp
 ```
 
-### Ver logs em tempo real:
+### Para ver os logs passando em tempo real (como em um filme):
 
 ```bash
 docker compose logs -f
@@ -116,15 +116,15 @@ docker compose logs -f
 
 ---
 
-## 🧪 Testando a aplicação
+## 🍧 Hora de Testar a Mágica 🪄
 
-### 1. Verificar saúde do sistema:
+### 1. Verificar a saúde do nosso sistema:
 
 ```bash
 curl http://localhost:8080/health
 ```
 
-**Resposta esperada:**
+**Resposta fofa esperada:**
 ```json
 {
   "status": "ok",
@@ -133,130 +133,104 @@ curl http://localhost:8080/health
 }
 ```
 
-### 2. Listar itens cadastrados:
+### 2. Listar os itens que já guardamos:
 
 ```bash
 curl http://localhost:8080/itens
 ```
 
-**Resposta:** JSON com os 3 itens de exemplo do `init.sql`.
-
-### 3. Filtrar por local:
+### 3. Filtrar por local específico:
 
 ```bash
 curl "http://localhost:8080/itens?local=biblio"
 ```
 
-### 4. Cadastrar novo item com foto:
+### 4. Cadastrar um item novo com foto:
 
 **Windows (PowerShell):**
 ```powershell
-curl.exe -F "descricao=Oculos de grau" -F "local=Bloco B" -F "foto=@oculos.jpg" http://localhost:8080/itens
+curl.exe -F "descricao=Oculos Rosa" -F "local=Cantina" -F "foto=@oculos.jpg" http://localhost:8080/itens
 ```
 
 **Linux/Mac:**
 ```bash
-curl -F "descricao=Oculos de grau" -F "local=Bloco B" -F "foto=@oculos.jpg" http://localhost:8080/itens
+curl -F "descricao=Oculos Rosa" -F "local=Cantina" -F "foto=@oculos.jpg" http://localhost:8080/itens
 ```
 
-**Resposta:**
-```json
-{
-  "id": 4,
-  "foto": "a3f8e9d1c2b4.jpg"
-}
-```
-
-### 5. Ver estatísticas:
+### 5. Ver as nossas estatísticas:
 
 ```bash
 curl http://localhost:8080/estatisticas
 ```
 
-**Resposta:**
-```json
-{
-  "itens_no_banco": 4,
-  "fotos_no_volume": 1
-}
-```
+### 6. Ver a fotinha no navegador:
 
-### 6. Visualizar foto no navegador:
-
-Abra no navegador: `http://localhost:8080/fotos/a3f8e9d1c2b4.jpg`
+Basta abrir: `http://localhost:8080/fotos/NOME_DA_FOTO.jpg` 📸
 
 ---
 
-## 🗺️ Rotas da API
+## 🗺️ Caminhos da nossa API 🌸
 
-| Método | Rota | Descrição | Parâmetros |
+| Método | Rota | O que faz? | O que precisa enviar? |
 |--------|------|-----------|------------|
-| `GET` | `/health` | Verifica status da aplicação e conexão com o banco | - |
-| `GET` | `/itens` | Lista todos os objetos cadastrados | `?local=texto` (opcional) |
-| `POST` | `/itens` | Cadastra novo objeto | `descricao`, `local`, `foto` (opcional) |
-| `GET` | `/fotos/<nome>` | Retorna a foto armazenada | - |
-| `GET` | `/estatisticas` | Mostra total de itens e fotos | - |
+| `GET` | `/health` | Vê se o sistema e o banco estão bem | - |
+| `GET` | `/itens` | Mostra todos os achados | `?local=texto` (se quiser) |
+| `POST` | `/itens` | Guarda um objeto novo | `descricao`, `local`, `foto` (opcional) |
+| `GET` | `/fotos/<nome>` | Mostra a imagem guardada | - |
+| `GET` | `/estatisticas` | Conta quantos itens e fotos temos | - |
 
 ---
 
-## 🛑 Como parar e destruir o ambiente
+## 🛑 Hora de dar Tchau (Parar e Destruir) 🧸
 
-### Parar os contêineres (mantém volumes):
+### Para os contêineres dormirem (mantém os dados a salvo):
 
 ```bash
 docker compose down
 ```
 
-> Os dados do banco e as fotos **permanecem** nos volumes.
+> Suas fotos e itens do banco continuam guardadinhos em segurança nos volumes! 💖
 
-### Parar e **remover os volumes** (limpa tudo):
+### Para fazer uma faxina completa (limpa TUDO):
 
 ```bash
 docker compose down -v
 ```
 
-> ⚠️ **ATENÇÃO**: Isso apaga todos os dados! Use apenas para resetar o ambiente.
-
-### Subir novamente após parar:
-
-```bash
-docker compose up -d
-```
-
-> Se não usar `-v` ao parar, os dados voltam intactos.
+> ⚠️ **CUIDADO**: Essa opção apaga tudinho! Use só quando quiser começar do zero.
 
 ---
 
-## 📁 Estrutura do projeto
+## 📁 Como organizamos nossa casinha 🎀
 
 ```
 achados-perdidos/
-├── app/
-│   ├── app.py              # Aplicação Flask
-│   ├── requirements.txt    # Dependências Python
-│   ├── Dockerfile          # Imagem do serviço web
-│   └── .dockerignore       # Arquivos ignorados no build
-├── db/
-│   └── init.sql            # Script de inicialização do banco
-├── docs/
-│   ├── arquitetura.png     # Diagrama da arquitetura
-│   ├── RELATORIO.md        # Relatório técnico detalhado
-│   ├── REFLEXAO.md         # Questões de reflexão
-│   └── evidencias/         # Prints dos testes
-├── docker-compose.yml      # Orquestração dos serviços
-├── .env                    # Credenciais (NÃO versionar!)
-├── .env.example            # Modelo de credenciais
-├── .gitignore              # Arquivos ignorados pelo Git
-└── README.md               # Este arquivo
+├── app/                  # O coração do sistema
+│   ├── app.py            # Nossa aplicação Flask
+│   ├── requirements.txt  # As dependências
+│   ├── Dockerfile        # A receita da imagem web
+│   └── .dockerignore     # O que o Docker não deve olhar
+├── db/                   
+│   └── init.sql          # Arquivo que prepara o banco logo de cara
+├── docs/                 
+│   ├── arquitetura.png   # O desenho lindo do projeto
+│   ├── RELATORIO.md      # Nosso relatório técnico super caprichado
+│   ├── REFLEXAO.md       # Nossos pensamentos sobre a nuvem
+│   └── evidencias/       # Os prints provando que tudo funciona
+├── docker-compose.yml    # O maestro da nossa orquestra
+├── .env                  # Segredos (shhh! 🤫)
+├── .env.example          # Molde para os segredos
+├── .gitignore            # O que o Git não deve levar
+└── README.md             # Este arquivo maravilhoso!
 ```
 
 ---
 
-## 🎁 Desafios bônus implementados
+## 🎁 Presentinhos Bônus Implementados 🦄
 
-### 1. ✅ Painel do banco (Adminer) — +0,3 pt
+### 1. Painel do Banco (Adminer) ✨
 
-O painel Adminer está configurado com **profile**, subindo apenas quando solicitado:
+Criamos um painel super prático que só sobe quando a gente chama:
 
 ```bash
 docker compose --profile debug up -d
@@ -264,7 +238,7 @@ docker compose --profile debug up -d
 
 Acesse em: `http://localhost:8081`
 
-**Credenciais (use as mesmas do `.env`):**
+**Credenciais (use as mesmas do seu `.env`):**
 - Sistema: `PostgreSQL`
 - Servidor: `db`
 - Usuário: `achados_user`
@@ -273,54 +247,23 @@ Acesse em: `http://localhost:8081`
 
 ---
 
-## 🔐 Segurança
+## 🔐 Segurança (Porque proteger os dados é super importante!) 💖
 
-- ✅ Nenhuma senha no código ou no `docker-compose.yml`
-- ✅ Porta do banco **não exposta** no host
-- ✅ Aplicação roda com usuário **sem privilégios de root**
-- ✅ Arquivo `.env` no `.gitignore`
-
----
-
-## 📚 Documentação adicional
-
-- **Relatório técnico**: [docs/RELATORIO.md](docs/RELATORIO.md)
-- **Reflexões e equivalência na nuvem**: [docs/REFLEXAO.md](docs/REFLEXAO.md)
-- **Evidências dos testes**: [docs/evidencias/](docs/evidencias/)
+- 🎀 Zero senhas expostas no código!
+- 🎀 Porta do banco trancadinha, sem acesso externo.
+- 🎀 Aplicação rodando como usuário simples (sem root), bem seguro.
+- 🎀 Arquivo `.env` ignorado no `.gitignore` com sucesso!
 
 ---
 
-## 🐛 Troubleshooting
+## 👩‍💻 Autora & Informações Acadêmicas
 
-### Erro: "Cannot connect to Docker daemon"
-```bash
-# Windows: Certifique-se de que o Docker Desktop está rodando
-# Linux: sudo systemctl start docker
-```
+Feito com muito carinho e dedicação para a nossa entrega final! 🎓✨
 
-### Erro: "port is already allocated"
-```bash
-# Algo já está usando a porta 8080
-docker compose down
-# Ou mude a porta no docker-compose.yml: "8081:5000"
-```
-
-### Ver logs detalhados:
-```bash
-docker compose logs web --tail 50
-docker compose logs db --tail 50
-```
+- **Engenheira de Nuvem**: Ana Clara (@Zanettii)
+- **Disciplina**: Computação em Nuvem
+- **Professor Incrível**: Fábio Castro
 
 ---
 
-## 👥 Autores
-
-Projeto desenvolvido para a disciplina de **Computação em Nuvem**.
-
-**Engenheiro de Nuvem responsável**: [Seu Nome]
-
----
-
-## 📄 Licença
-
-Projeto educacional — uso livre para fins acadêmicos.
+> *"Nas nuvens, a gente guarda o que encontra e não perde mais nada!"* ☁️💖

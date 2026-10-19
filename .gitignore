@@ -1,0 +1,14 @@
+# Arquivo de credenciais (nunca versionar!)
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Docker
+docker-compose.override.yml
+
+# Sistema operacional
+.DS_Store
+Thumbs.db

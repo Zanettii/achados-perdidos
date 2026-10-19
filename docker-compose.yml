@@ -1,0 +1,90 @@
+# ============================================================
+# Docker Compose — Achados & Perdidos
+# ============================================================
+# Sobe a aplicação web + banco PostgreSQL com um único comando:
+#   docker compose up -d --build
+# ============================================================
+
+services:
+  # ------------------------------------------------
+  # Banco de dados PostgreSQL
+  # ------------------------------------------------
+  db:
+    image: postgres:16-alpine
+    container_name: achados-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      # Volume nomeado para dados persistentes do PostgreSQL
+      - dados_banco:/var/lib/postgresql/data
+      # Bind mount do init.sql (somente leitura) para inicialização
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - rede_interna
+    # Healthcheck: verifica se o banco aceita conexões
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    # NENHUMA porta publicada no host (RNF: banco isolado)
+
+  # ------------------------------------------------
+  # Aplicação Web (Flask + Gunicorn)
+  # ------------------------------------------------
+  web:
+    build: ./app
+    container_name: achados-web
+    restart: unless-stopped
+    ports:
+      - "8080:5000"
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: ${POSTGRES_DB}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      UPLOAD_DIR: /app/uploads
+    volumes:
+      # Volume nomeado para fotos enviadas pelos usuários
+      - fotos:/app/uploads
+    networks:
+      - rede_interna
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # ------------------------------------------------
+  # Painel do banco (desafio bônus) — sobe apenas com --profile debug
+  # ------------------------------------------------
+  adminer:
+    image: adminer:4.8.1
+    container_name: achados-adminer
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    networks:
+      - rede_interna
+    depends_on:
+      db:
+        condition: service_healthy
+    profiles:
+      - debug
+
+# ================================================
+# Volumes nomeados (persistência)
+# ================================================
+volumes:
+  dados_banco:
+  fotos:
+
+# ================================================
+# Rede definida pelo usuário (DNS interno)
+# ================================================
+networks:
+  rede_interna:
+    driver: bridge
